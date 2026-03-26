@@ -14,14 +14,14 @@ const copyPromoButtonEl = document.getElementById("copyPromoButton");
 
 let countdownInterval = null;
 let refreshInterval = null;
-const CONFIG_URL = "../config.json";
+const CONFIG_URL = "/config.json";
 
 async function loadConfig() {
   const response = await fetch(CONFIG_URL, { cache: "no-store" });
   if (!response.ok) throw new Error(`Failed to load config.json (${response.status})`);
 
   const config = await response.json();
-  config.__configBaseUrl = new URL(CONFIG_URL, window.location.href);
+  config.__configBaseUrl = new URL(CONFIG_URL, window.location.origin);
   return config;
 }
 
@@ -326,12 +326,12 @@ async function init() {
     const config = await loadConfig();
 
     if (config.pages?.maintenanceEnabled) {
-      window.location.replace("../maintenance/");
+      window.location.replace("/maintenance/");
       return;
     }
 
     if (config.pages?.criticalEnabled) {
-      window.location.replace("../critical/");
+      window.location.replace("/critical/");
       return;
     }
 
