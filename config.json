@@ -17,8 +17,8 @@
     "message": "We are improving the leaderboard right now. Please check back soon."
   },
   "assets": {
-    "logo": "/skinrave-leaderboard/assets/logo.png",
-    "tokenIcon": "/skinrave-leaderboard/assets/token.png"
+    "logo": "/assets/logo.png",
+    "tokenIcon": "/assets/token.png"
   },
   "promo": {
     "title": "Support with affiliate code",
