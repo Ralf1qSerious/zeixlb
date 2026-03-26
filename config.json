@@ -27,7 +27,7 @@
     "description": "Use code ZEIX on Skinrave and support the affiliate race."
   },
   "api": {
-    "url": "http://127.0.0.1:8787/leaderboard",
+    "url": "https://api.zeix.online/leaderboard"
     "method": "GET",
     "headers": {}
   },
