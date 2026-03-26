@@ -27,7 +27,7 @@
     "description": "Use code ZEIX on Skinrave and support the affiliate race."
   },
   "api": {
-    "url": "https://api.zeix.online/leaderboard"
+    "url": "https://api.zeix.online/leaderboard",
     "method": "GET",
     "headers": {}
   },
@@ -49,8 +49,8 @@
   },
   "event": {
     "label": "Ends in",
-    "startDate": "2026-03-26T00:00:00Z",
-    "endDate": "2026-04-03T23:59:59Z"
+    "startDate": "2026-03-25T00:00:00Z",
+    "endDate": "2026-04-02T23:59:59Z"
   },
   "refresh": {
     "intervalMs": 60000
