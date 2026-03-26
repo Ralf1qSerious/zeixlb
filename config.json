@@ -5,7 +5,7 @@
   },
   "pages": {
     "maintenanceEnabled": false,
-    "criticalEnabled": false
+    "criticalEnabled": true
   },
   "critical": {
     "title": "Critical Notice",
