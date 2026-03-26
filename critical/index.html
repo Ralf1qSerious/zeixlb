@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Critical Notice</title>
-  <link rel="stylesheet" href="/skinrave-leaderboard/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body class="center-page">
   <canvas id="particles"></canvas>
@@ -20,25 +20,25 @@
       </p>
 
       <div class="notice-actions">
-        <a id="criticalButton" class="status-button primary-button" href="/skinrave-leaderboard/leaderboard/">Continue to Leaderboard</a>
+        <a id="criticalButton" class="status-button primary-button" href="/leaderboard/">Continue to Leaderboard</a>
       </div>
     </div>
   </div>
 
-  <script src="/skinrave-leaderboard/js/particles.js"></script>
+  <script src="/js/particles.js"></script>
   <script>
     async function initCritical() {
       try {
-        const response = await fetch("/skinrave-leaderboard/config.json", { cache: "no-store" });
+        const response = await fetch("/config.json", { cache: "no-store" });
         const config = await response.json();
 
         if (config.pages?.maintenanceEnabled) {
-          window.location.replace("/skinrave-leaderboard/maintenance/");
+          window.location.replace("/maintenance/");
           return;
         }
 
         if (!config.pages?.criticalEnabled) {
-          window.location.replace("/skinrave-leaderboard/leaderboard/");
+          window.location.replace("/leaderboard/");
           return;
         }
 
