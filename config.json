@@ -27,7 +27,7 @@
     "description": "Use code ZEIX on Skinrave and support the affiliate race."
   },
   "api": {
-    "url": "https://api.zeix.online/leaderboard",
+    "url": "https://polished-sun-0f43.ralf1nsh2025.workers.dev/leaderboard",
     "method": "GET",
     "headers": {}
   },
