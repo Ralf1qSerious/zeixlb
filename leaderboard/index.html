@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skinrave Leaderboard</title>
+  <link rel="stylesheet" href="/skinrave-leaderboard/css/style.css" />
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="page-shell">
+    <header class="hero">
+      <div class="brand">
+        <img id="brandLogo" src="/skinrave-leaderboard/assets/logo.png" alt="Skinrave Logo" class="brand-logo" />
+        <div>
+          <p class="eyebrow" id="siteSubtitle">Skinrave Affiliate Race</p>
+          <h1 id="siteTitle">Skinrave Leaderboard</h1>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="meta-card countdown-card">
+          <span class="meta-label" id="countdownLabel">Ends in</span>
+          <span id="countdownValue">Loading...</span>
+        </div>
+
+        <div class="meta-card">
+          <span class="meta-label">Updated</span>
+          <span id="lastUpdated">Loading...</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="promo-card glass-card">
+      <div class="promo-glow"></div>
+      <div class="promo-copy">
+        <p class="promo-label" id="promoTitle">Support with affiliate code</p>
+
+        <div class="promo-code-row">
+          <div class="promo-code-box">
+            <span class="promo-code-prefix">CODE</span>
+            <span class="promo-code" id="promoCode">ZEIX</span>
+          </div>
+
+          <button class="copy-button" id="copyPromoButton" type="button">Copy Code</button>
+        </div>
+
+        <p class="promo-description" id="promoDescription">
+          Use code ZEIX on Skinrave and support the affiliate race.
+        </p>
+      </div>
+    </section>
+
+    <main class="leaderboard-wrap">
+      <section class="podium-section">
+        <div class="section-title-row">
+          <h2>Top 3 Podium</h2>
+          <p class="section-subtitle">Ranks 1, 2 and 3 earn the main rewards.</p>
+        </div>
+
+        <div id="podium" class="podium">
+          <div class="loading-card">Loading podium...</div>
+        </div>
+      </section>
+
+      <section class="table-section">
+        <div class="section-title-row">
+          <h2>4+ Affiliates</h2>
+          <p class="section-subtitle">Ranks 4 and below are listed here.</p>
+        </div>
+
+        <div class="table-card glass-card">
+          <div class="table-head">
+            <span>#</span>
+            <span>Affiliate</span>
+            <span>Wagered</span>
+            <span>Reward</span>
+          </div>
+          <div id="leaderboardList" class="table-body">
+            <div class="loading-row">Loading affiliates...</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026, All rights reserved.</p>
+      <p>This leaderboard is not affiliated with Skinrave. Any rewards, self tips, or listings shown here are community-managed and informational only.</p>
+    </footer>
+  </div>
+
+  <script src="/skinrave-leaderboard/js/particles.js"></script>
+  <script src="/skinrave-leaderboard/js/leaderboard.js"></script>
+</body>
+</html>

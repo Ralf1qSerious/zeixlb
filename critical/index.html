@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Critical Notice</title>
+  <link rel="stylesheet" href="/skinrave-leaderboard/css/style.css" />
+</head>
+<body class="center-page">
+  <canvas id="particles"></canvas>
+
+  <div class="status-shell">
+    <div class="status-card glass-card floating-card notice-card critical-card">
+      <h1 id="criticalTitle">Critical Notice</h1>
+
+      <div class="big-emoji">⚠️</div>
+
+      <p id="criticalMessage" class="status-text">
+        Our systems are currently down. Some services may be temporarily unavailable while we work on restoring everything as quickly as possible.
+      </p>
+
+      <div class="notice-actions">
+        <a id="criticalButton" class="status-button primary-button" href="/skinrave-leaderboard/leaderboard/">Continue to Leaderboard</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/skinrave-leaderboard/js/particles.js"></script>
+  <script>
+    async function initCritical() {
+      try {
+        const response = await fetch("/skinrave-leaderboard/config.json", { cache: "no-store" });
+        const config = await response.json();
+
+        if (config.pages?.maintenanceEnabled) {
+          window.location.replace("/skinrave-leaderboard/maintenance/");
+          return;
+        }
+
+        if (!config.pages?.criticalEnabled) {
+          window.location.replace("/skinrave-leaderboard/leaderboard/");
+          return;
+        }
+
+        document.title = `${config.critical?.title || "Critical Notice"} | ${config.site?.title || "Skinrave"}`;
+
+        document.getElementById("criticalTitle").textContent =
+          config.critical?.title || "Critical Notice";
+
+        document.getElementById("criticalMessage").textContent =
+          config.critical?.message ||
+          "Our systems are currently down. Some services may be temporarily unavailable while we work on restoring everything as quickly as possible.";
+
+        document.getElementById("criticalButton").textContent =
+          config.critical?.buttonText || "Continue to Leaderboard";
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    initCritical();
+  </script>
+</body>
+</html>
