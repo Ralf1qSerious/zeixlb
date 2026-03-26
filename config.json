@@ -1,0 +1,58 @@
+{
+  "site": {
+    "title": "Skinrave Leaderboard",
+    "subtitle": "Skinrave Affiliate Race"
+  },
+  "pages": {
+    "maintenanceEnabled": false,
+    "criticalEnabled": false
+  },
+  "critical": {
+    "title": "Critical Notice",
+    "message": "Our systems are currently down. Some services may be temporarily unavailable while we work on restoring everything as quickly as possible.",
+    "buttonText": "Continue to Leaderboard"
+  },
+  "maintenance": {
+    "title": "Under Maintenance",
+    "message": "We are improving the leaderboard right now. Please check back soon."
+  },
+  "assets": {
+    "logo": "/skinrave-leaderboard/assets/logo.png",
+    "tokenIcon": "/skinrave-leaderboard/assets/token.png"
+  },
+  "promo": {
+    "title": "Support with affiliate code",
+    "code": "ZEIX",
+    "buttonText": "Copy Code",
+    "description": "Use code ZEIX on Skinrave and support the affiliate race."
+  },
+  "api": {
+    "url": "http://127.0.0.1:8787/leaderboard",
+    "method": "GET",
+    "headers": {}
+  },
+  "dataMapping": {
+    "root": "",
+    "nameField": "name",
+    "scoreField": "wagered"
+  },
+  "rewards": {
+    "1": 100,
+    "2": 50,
+    "3": 30,
+    "4": 10,
+    "5": 10
+  },
+  "formatting": {
+    "scoreLabel": "Wagered",
+    "decimalPlaces": 2
+  },
+  "event": {
+    "label": "Ends in",
+    "startDate": "2026-03-26T00:00:00Z",
+    "endDate": "2026-04-03T23:59:59Z"
+  },
+  "refresh": {
+    "intervalMs": 60000
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maintenance</title>
+  <link rel="stylesheet" href="/skinrave-leaderboard/css/style.css" />
+</head>
+<body class="center-page">
+  <canvas id="particles"></canvas>
+
+  <div class="status-shell">
+    <div class="status-card glass-card floating-card notice-card maintenance-card">
+      <h1 id="maintenanceTitle">Under Maintenance</h1>
+
+      <div class="big-emoji">🛠️</div>
+      <div class="spinner-ring"></div>
+
+      <p id="maintenanceMessage" class="status-text">
+        We are improving the leaderboard right now. Please check back soon.
+      </p>
+
+      <div class="notice-actions">
+        <a class="status-button primary-button" href="/skinrave-leaderboard/">Refresh</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/skinrave-leaderboard/js/particles.js"></script>
+  <script>
+    async function initMaintenance() {
+      try {
+        const response = await fetch("/skinrave-leaderboard/config.json", { cache: "no-store" });
+        const config = await response.json();
+
+        if (!config.pages?.maintenanceEnabled) {
+          if (config.pages?.criticalEnabled) {
+            window.location.replace("/skinrave-leaderboard/critical/");
+            return;
+          }
+          window.location.replace("/skinrave-leaderboard/leaderboard/");
+          return;
+        }
+
+        document.title = `${config.maintenance?.title || "Maintenance"} | ${config.site?.title || "Skinrave"}`;
+
+        document.getElementById("maintenanceTitle").textContent =
+          config.maintenance?.title || "Under Maintenance";
+
+        document.getElementById("maintenanceMessage").textContent =
+          config.maintenance?.message ||
+          "We are improving the leaderboard right now. Please check back soon.";
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    initMaintenance();
+  </script>
+</body>
+</html>
