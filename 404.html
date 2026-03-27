@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 | Zeix</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    :root {
+      --bg: #040908;
+      --bg-2: #07140f;
+      --primary: #57ffa4;
+      --primary-2: #1d9f5b;
+      --primary-3: #12683a;
+      --text: #ecfff5;
+      --muted: #96c4a8;
+      --border: rgba(87, 255, 164, 0.14);
+      --panel: rgba(10, 24, 18, 0.82);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(87,255,164,0.06), transparent 28%),
+        radial-gradient(circle at top right, rgba(87,255,164,0.04), transparent 24%),
+        linear-gradient(180deg, #020806 0%, #04120d 100%);
+      overflow: hidden;
+    }
+
+    body {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 920px);
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(15, 35, 24, 0.92), rgba(8, 20, 14, 0.96));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      padding: 42px 34px;
+      text-align: center;
+      animation: floatCard 4.8s ease-in-out infinite;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(87,255,164,0.12), transparent 55%),
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.025) 35%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: rgba(87,255,164,0.09);
+      border: 1px solid rgba(87,255,164,0.18);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .logo-wrap {
+      width: min(100%, 260px);
+      margin: 0 auto 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo {
+      width: 100%;
+      max-width: 220px;
+      max-height: 180px;
+      object-fit: contain;
+      object-position: center;
+      filter:
+        drop-shadow(0 20px 34px rgba(0,0,0,0.32))
+        drop-shadow(0 0 16px rgba(87,255,164,0.08));
+      animation: heroFloat 5.5s ease-in-out infinite;
+    }
+
+    .code404 {
+      margin: 0;
+      font-size: clamp(68px, 12vw, 140px);
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      text-shadow:
+        0 0 30px rgba(87,255,164,0.10),
+        0 10px 30px rgba(0,0,0,0.28);
+    }
+
+    h1 {
+      margin: 12px 0 10px;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.02;
+      font-weight: 900;
+    }
+
+    p {
+      margin: 0 auto;
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(15px, 1.8vw, 18px);
+      line-height: 1.8;
+    }
+
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+      transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button.primary {
+      background: linear-gradient(180deg, var(--primary-2), var(--primary-3));
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.26);
+    }
+
+    .button.secondary {
+      color: var(--text);
+      background: rgba(87,255,164,0.08);
+      border: 1px solid rgba(87,255,164,0.18);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+    }
+
+    .button::before {
+      content: "";
+      position: absolute;
+      top: -30%;
+      left: -36%;
+      width: 46%;
+      height: 170%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.04), transparent);
+      transform: rotate(25deg);
+      opacity: 0.42;
+      pointer-events: none;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .tiny {
+      margin-top: 18px;
+      font-size: 13px;
+      color: rgba(150,196,168,0.8);
+    }
+
+    .glow-orb {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(87,255,164,0.14), transparent 68%);
+      filter: blur(10px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .glow-orb.one {
+      top: -50px;
+      left: -30px;
+    }
+
+    .glow-orb.two {
+      right: -40px;
+      bottom: -50px;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 34px 20px;
+        border-radius: 24px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="shell">
+    <div class="card">
+      <div class="glow-orb one"></div>
+      <div class="glow-orb two"></div>
+
+      <div class="badge">Page Not Found</div>
+
+      <div class="logo-wrap">
+        <img src="/assets/logo.png" alt="Zeix Logo" class="logo" />
+      </div>
+
+      <div class="code404">404</div>
+      <h1>You took a wrong turn.</h1>
+      <p>
+        The page you’re looking for doesn’t exist, was moved, or the link is broken.
+        Head back home or jump straight to the leaderboard.
+      </p>
+
+      <div class="actions">
+        <a class="button primary" href="/">Go Home</a>
+        <a class="button secondary" href="/leaderboard/">Open Leaderboard</a>
+      </div>
+
+      <div class="tiny">Zeix • Clean routes only</div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+
+    let width = 0;
+    let height = 0;
+    let points = [];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      points = Array.from({ length: Math.max(36, Math.floor(width / 36)) }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.8 + 0.8
+      }));
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(87,255,164,0.72)";
+        ctx.fill();
+
+        for (let j = i + 1; j < points.length; j++) {
+          const q = points[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(87,255,164,${0.12 * (1 - dist / 120)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    draw();
+  </script>
+</body>
+</html>
