@@ -4,7 +4,7 @@
     "subtitle": "Skinrave Affiliate Race"
   },
   "pages": {
-    "maintenanceEnabled": true,
+    "maintenanceEnabled": false,
     "criticalEnabled": false
   },
   "critical": {
