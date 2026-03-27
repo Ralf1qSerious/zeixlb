@@ -35,34 +35,43 @@
     return wrap;
   }
 
-  function createAdToggle(position) {
+  function createAdToggle(position, maxWidth) {
     const toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = `floating-ad-toggle ${position || "bottom-right"}`;
     toggle.textContent = "Show Ad";
     toggle.setAttribute("aria-label", "Show ad");
+    toggle.style.setProperty("--ad-max-width", `${maxWidth || 340}px`);
     toggle.style.display = "none";
     return toggle;
   }
 
   function hideAd(container, toggle) {
     container.classList.add("is-hiding");
+
     setTimeout(() => {
       container.style.display = "none";
       container.classList.remove("is-visible");
       container.classList.remove("is-hiding");
+
       toggle.style.display = "inline-flex";
-      toggle.classList.add("is-visible");
+      requestAnimationFrame(() => {
+        toggle.classList.add("is-visible");
+      });
     }, 320);
   }
 
   function showAd(container, toggle) {
     toggle.classList.remove("is-visible");
-    toggle.style.display = "none";
-    container.style.display = "block";
-    requestAnimationFrame(() => {
-      container.classList.add("is-visible");
-    });
+
+    setTimeout(() => {
+      toggle.style.display = "none";
+      container.style.display = "block";
+
+      requestAnimationFrame(() => {
+        container.classList.add("is-visible");
+      });
+    }, 180);
   }
 
   function renderAd(ad, config, container, toggle) {
@@ -118,13 +127,15 @@
     if (!ads.length) return;
 
     const position = config.position || "bottom-right";
+    const maxWidth = config.style?.maxWidth || 340;
+
     const wrap = createAdContainer(
       position,
-      config.style?.maxWidth || 340,
+      maxWidth,
       !!config.style?.pulse
     );
 
-    const toggle = createAdToggle(position);
+    const toggle = createAdToggle(position, maxWidth);
 
     document.body.appendChild(wrap);
     document.body.appendChild(toggle);
@@ -144,6 +155,7 @@
       setInterval(() => {
         if (!document.body.contains(wrap)) return;
         if (wrap.style.display === "none") return;
+
         index = (index + 1) % ads.length;
         renderAd(ads[index], config, wrap, toggle);
       }, Number(config.rotation.intervalMs || 7000));
