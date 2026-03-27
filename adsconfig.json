@@ -1,1 +1,31 @@
-
+{
+  "enabled": true,
+  "position": "bottom-right",
+  "showOn": {
+    "home": true,
+    "leaderboard": true,
+    "maintenance": true,
+    "critical": true
+  },
+  "style": {
+    "glass": true,
+    "showCloseButton": true,
+    "pulse": true,
+    "maxWidth": 340
+  },
+  "rotation": {
+    "enabled": true,
+    "intervalMs": 7000
+  },
+  "ads": [
+    {
+      "enabled": true,
+      "title": "Ralf1qBoards",
+      "text": "Get your own customized leaderboard for cheap prices!",
+      "image": "/assets/ad1.png",
+      "buttonText": "Open Discord",
+      "buttonUrl": "https://discord.gg/RBRbDgH9Bd",
+      "secondaryText": "Custom • Leaderboard • Cheap"
+    }
+  ]
+}
