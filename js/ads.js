@@ -35,14 +35,37 @@
     return wrap;
   }
 
-  function hideAd(container) {
+  function createAdToggle(position) {
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = `floating-ad-toggle ${position || "bottom-right"}`;
+    toggle.textContent = "Show Ad";
+    toggle.setAttribute("aria-label", "Show ad");
+    toggle.style.display = "none";
+    return toggle;
+  }
+
+  function hideAd(container, toggle) {
     container.classList.add("is-hiding");
     setTimeout(() => {
-      container.remove();
+      container.style.display = "none";
+      container.classList.remove("is-visible");
+      container.classList.remove("is-hiding");
+      toggle.style.display = "inline-flex";
+      toggle.classList.add("is-visible");
     }, 320);
   }
 
-  function renderAd(ad, config, container) {
+  function showAd(container, toggle) {
+    toggle.classList.remove("is-visible");
+    toggle.style.display = "none";
+    container.style.display = "block";
+    requestAnimationFrame(() => {
+      container.classList.add("is-visible");
+    });
+  }
+
+  function renderAd(ad, config, container, toggle) {
     const showHideButton = !!config.style?.showHideButton;
     const showSponsored = !!config.style?.showSponsoredLabel;
     const sponsoredText = config.style?.sponsoredLabelText || "Sponsored";
@@ -77,7 +100,7 @@
 
     const hideBtn = container.querySelector(".floating-ad-hide");
     if (hideBtn) {
-      hideBtn.addEventListener("click", () => hideAd(container));
+      hideBtn.addEventListener("click", () => hideAd(container, toggle));
     }
   }
 
@@ -94,26 +117,35 @@
     const ads = Array.isArray(config.ads) ? config.ads.filter(ad => ad && ad.enabled) : [];
     if (!ads.length) return;
 
+    const position = config.position || "bottom-right";
     const wrap = createAdContainer(
-      config.position || "bottom-right",
+      position,
       config.style?.maxWidth || 340,
       !!config.style?.pulse
     );
 
+    const toggle = createAdToggle(position);
+
     document.body.appendChild(wrap);
+    document.body.appendChild(toggle);
 
     let index = 0;
-    renderAd(ads[index], config, wrap);
+    renderAd(ads[index], config, wrap, toggle);
 
     requestAnimationFrame(() => {
       wrap.classList.add("is-visible");
     });
 
+    toggle.addEventListener("click", () => {
+      showAd(wrap, toggle);
+    });
+
     if (config.rotation?.enabled && ads.length > 1) {
       setInterval(() => {
         if (!document.body.contains(wrap)) return;
+        if (wrap.style.display === "none") return;
         index = (index + 1) % ads.length;
-        renderAd(ads[index], config, wrap);
+        renderAd(ads[index], config, wrap, toggle);
       }, Number(config.rotation.intervalMs || 7000));
     }
   } catch (error) {
