@@ -35,17 +35,32 @@
     return wrap;
   }
 
+  function hideAd(container) {
+    container.classList.add("is-hiding");
+    setTimeout(() => {
+      container.remove();
+    }, 320);
+  }
+
   function renderAd(ad, config, container) {
-    const showClose = !!config.style?.showCloseButton;
+    const showHideButton = !!config.style?.showHideButton;
+    const showSponsored = !!config.style?.showSponsoredLabel;
+    const sponsoredText = config.style?.sponsoredLabelText || "Sponsored";
+
     const img = ad.image ? `
       <div class="floating-ad-media">
         <img src="${escapeHtml(resolveUrl(ad.image))}" alt="${escapeHtml(ad.title || "Ad")}" loading="lazy">
       </div>
     ` : "";
 
+    const sponsored = showSponsored
+      ? `<div class="floating-ad-sponsored">${escapeHtml(sponsoredText)}</div>`
+      : "";
+
     container.innerHTML = `
       <div class="floating-ad-card ${config.style?.glass ? "glass-card" : ""}">
-        ${showClose ? `<button class="floating-ad-close" type="button" aria-label="Close ad">×</button>` : ""}
+        ${showHideButton ? `<button class="floating-ad-hide" type="button">Hide</button>` : ""}
+        ${sponsored}
         ${img}
         <div class="floating-ad-content">
           <div class="floating-ad-title">${escapeHtml(ad.title || "Advertisement")}</div>
@@ -60,11 +75,9 @@
       </div>
     `;
 
-    const closeBtn = container.querySelector(".floating-ad-close");
-    if (closeBtn) {
-      closeBtn.addEventListener("click", () => {
-        container.remove();
-      });
+    const hideBtn = container.querySelector(".floating-ad-hide");
+    if (hideBtn) {
+      hideBtn.addEventListener("click", () => hideAd(container));
     }
   }
 
@@ -92,8 +105,13 @@
     let index = 0;
     renderAd(ads[index], config, wrap);
 
+    requestAnimationFrame(() => {
+      wrap.classList.add("is-visible");
+    });
+
     if (config.rotation?.enabled && ads.length > 1) {
       setInterval(() => {
+        if (!document.body.contains(wrap)) return;
         index = (index + 1) % ads.length;
         renderAd(ads[index], config, wrap);
       }, Number(config.rotation.intervalMs || 7000));
