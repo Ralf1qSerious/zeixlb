@@ -81,6 +81,17 @@ img {
   z-index: 2;
 }
 
+.page-shell {
+  width: min(100% - 32px, var(--max-width));
+  margin: 0 auto;
+  padding: 26px 0 0;
+}
+
+.status-shell {
+  width: min(100% - 32px, 860px);
+  margin: auto auto 0;
+}
+
 .glass-card {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
