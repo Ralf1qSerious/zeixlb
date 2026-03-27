@@ -9,9 +9,11 @@
   },
   "style": {
     "glass": true,
-    "showCloseButton": true,
+    "showHideButton": true,
     "pulse": true,
-    "maxWidth": 340
+    "maxWidth": 340,
+    "showSponsoredLabel": true,
+    "sponsoredLabelText": "Sponsored"
   },
   "rotation": {
     "enabled": true,
@@ -20,12 +22,12 @@
   "ads": [
     {
       "enabled": true,
-      "title": "Ralf1qBoards",
-      "text": "Get your own customized leaderboard for cheap prices!",
+      "title": "Join Ralf1qBoards",
+      "text": "Want to get fully customized leaderboards for cheap prices?",
       "image": "/assets/ad1.png",
-      "buttonText": "Open Discord",
+      "buttonText": "Join Discord",
       "buttonUrl": "https://discord.gg/RBRbDgH9Bd",
-      "secondaryText": "Custom • Leaderboard • Cheap"
+      "secondaryText": "Leaderboards • Cheap • Customized"
     }
   ]
 }
